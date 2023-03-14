@@ -1,4 +1,4 @@
-# pet-hospital-back-manage: front-end
+# pet-hospital-front-learn: front-end
 
 ## Introduction
 The front end is developed using _vue 2.0_.

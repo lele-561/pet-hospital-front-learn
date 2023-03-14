@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span=24>
         <el-card class="card">
-          <h2>虚拟宠物医院后台管理系统 v1.0</h2>
+          <h2>虚拟宠物医院学习系统 v1.0</h2>
         </el-card>
       </el-col>
     </el-row>

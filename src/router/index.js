@@ -5,16 +5,8 @@ import Home from '@/views/Home.vue'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 
-import DepartmentManage from "../views/Detail/BasicManage/DepartmentManage";
-import DrugManage from "../views/Detail/BasicManage/DrugManage";
-import InspectionManage from "../views/Detail/BasicManage/InspectionManage";
-import PeronnelManage from "../views/Detail/BasicManage/PeronnelManage";
-import DiseaseExample from "../views/Detail/DiseaseManage/DiseaseExample";
-import DiseaseReal from "../views/Detail/DiseaseManage/DiseaseReal";
-import ExamManage from "../views/Detail/TestManage/ExamManage";
-import PaperManage from "../views/Detail/TestManage/PaperManage";
-import QuestionManage from "../views/Detail/TestManage/QuestionManage";
-import UserManage from "../views/Detail/UserManage";
+import HospitalMap from "../views/Detail/HospitalGuide/HospitalMap";
+import RoomDetail from "../views/Detail/HospitalGuide/RoomDetail";
 
 Vue.use(VueRouter)
 
@@ -34,65 +26,16 @@ const routes = [{
             login: true
         }
     },
-        // 基本管理
+        // 医院导览
         {
-            path: 'basicManage/department',
-            name: 'basicManage_department',
-            component: DepartmentManage,
-            meta: {
-                login: true
-            }
+            path: 'hospitalGuide/map',
+            name: 'hospitalGuide_map',
+            component: HospitalMap
         },
         {
-            path: 'basicManage/drug',
-            name: 'basicManage_drug',
-            component: DrugManage
-        },
-        {
-            path: 'basicManage/inspection',
-            name: 'basicManage_inspection',
-            component: InspectionManage
-        },
-        {
-            path: 'basicManage/peronnel',
-            name: 'basicManage_peronnel',
-            component: PeronnelManage
-        },
-        // 疾病管理
-        {
-            path: 'diseaseManage/diseaseReal',
-            name: 'diseaseManage_diseaseReal',
-            component: DiseaseReal
-        },
-        {
-            path: 'diseaseManage/diseaseExample',
-            name: 'diseaseManage_diseaseExample',
-            component: DiseaseExample
-        },
-        // 测试管理
-        {
-            path: 'testManage/exam',
-            name: 'testManage_exam',
-            component: ExamManage
-        },
-        {
-            path: 'testManage/paper',
-            name: 'testManage_paper',
-            component: PaperManage
-        },
-        {
-            path: 'testManage/question',
-            name: 'testManage_question',
-            component: QuestionManage
-        },
-        // 用户管理
-        {
-            path: 'userManage',
-            name: 'userManage',
-            component: UserManage,
-            meta: {
-                login: true
-            }
+            path: 'hospitalGuide/room',
+            name: 'hospitalGuide_romm',
+            component: RoomDetail
         },
     ]
 },

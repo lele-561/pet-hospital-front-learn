@@ -1,6 +1,6 @@
 module.exports = {
     devServer: {
-        port: 8090,
+        port: 8091,
         host: '0.0.0.0',
         // 跨域1
         // proxy: "http://localhost:8080"

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "DiseaseInfo"
+  name: "RoomDetail"
 }
 </script>
 
