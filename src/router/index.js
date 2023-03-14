@@ -34,7 +34,7 @@ const routes = [{
         },
         {
             path: 'hospitalGuide/room',
-            name: 'hospitalGuide_romm',
+            name: 'hospitalGuide_room',
             component: RoomDetail
         },
     ]
