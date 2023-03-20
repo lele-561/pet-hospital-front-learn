@@ -1,7 +1,6 @@
 ﻿<krpano version="1.19" title="Virtual Tour">
-
 	<include url="skin/vtourskin.xml" />
-
+	<include url="common/hotspot/hotspot.xml" />
 	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
 	<skin_settings maps="false"
 	               maps_type="google"
@@ -53,9 +52,8 @@
 	               design_text_css="color:#FFFFFF; font-family:Arial;"
 	               design_text_shadow="1"
 	               />
-
 	<!--
-	    For an alternative skin design either change the <skin_settings> values 
+	    For an alternative skin design either change the <skin_settings> values
 	    from above or optionally include one of the predefined designs from below.
 	-->
 	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
@@ -65,7 +63,6 @@
 	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
 	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
 
-
 	<!-- startup action - load the first scene -->
 	<action name="startup" autorun="onstart">
 		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
@@ -73,175 +70,132 @@
 		if(startactions !== null, startactions() );
 	</action>
 
-
-	
-	<scene name="scene_dating" title="大厅" onstart="" thumburl="panos/大厅.tiles/thumb.jpg" lat="" lng="" heading="">
-
+	<scene name="scene_大厅" title="大厅" onstart="" thumburl="panos/大厅.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
 		<preview url="panos/大厅.tiles/preview.jpg" />
-
 		<image>
 			<cube url="panos/大厅.tiles/pano_%s.jpg" />
 		</image>
-
+		<hotspot name="spot_大厅_1" style="hotspot_arrow_white" ath="180.0" atv="20.0" linkedscene="scene_左边走廊1" title="前往「左边走廊」"/>
+		<hotspot name="spot_大厅_2" style="hotspot_arrow_white" ath="-90.0" atv="20.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
 	</scene>
-
-	<scene name="scene_huayanshi" title="化验室" onstart="" thumburl="panos/化验室.tiles/thumb.jpg" lat="" lng="" heading="">
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/化验室.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/化验室.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
-	<scene name="scene_meirongshi" title="美容室" onstart="" thumburl="panos/美容室.tiles/thumb.jpg" lat="" lng="" heading="">
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/美容室.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/美容室.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
-	<scene name="scene_shoushushi" title="手术室" onstart="" thumburl="panos/手术室.tiles/thumb.jpg" lat="" lng="" heading="">
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/手术室.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/手术室.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
-	<scene name="scene_shuyequ" title="输液区" onstart="" thumburl="panos/输液区.tiles/thumb.jpg" lat="" lng="" heading="">
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/输液区.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/输液区.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
-	<scene name="scene_yaofang" title="药房" onstart="" thumburl="panos/药房.tiles/thumb.jpg" lat="" lng="" heading="">
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/药房.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/药房.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
-	<scene name="scene_youbianzoulang1" title="右边走廊1" onstart="" thumburl="panos/右边走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/右边走廊1.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/右边走廊1.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
-	<scene name="scene_youbianzoulang2" title="右边走廊2" onstart="" thumburl="panos/右边走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/右边走廊2.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/右边走廊2.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
-	<scene name="scene_zhenshi" title="诊室" onstart="" thumburl="panos/诊室.tiles/thumb.jpg" lat="" lng="" heading="">
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/诊室.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/诊室.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
-	<scene name="scene_中间走廊2" title="中间走廊2" onstart="" thumburl="panos/中间走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/中间走廊2.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/中间走廊2.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
 	<scene name="scene_中间走廊1" title="中间走廊1" onstart="" thumburl="panos/中间走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
-
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
 		<preview url="panos/中间走廊1.tiles/preview.jpg" />
-
 		<image>
 			<cube url="panos/中间走廊1.tiles/pano_%s.jpg" />
 		</image>
-
+		<hotspot name="spot_中间走廊1_1" style="hotspot_arrow_white" ath="-15.0" atv="20.0" linkedscene="scene_大厅" title="前往「大厅」"/>
+		<hotspot name="spot_中间走廊1_2" style="hotspot_arrow_white" ath="70.0" atv="10.0" linkedscene="scene_诊室" title="进入「诊室」"/>
+		<hotspot name="spot_中间走廊1_3" style="hotspot_arrow_white" ath="150.0" atv="10.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
 	</scene>
-
-	<scene name="scene_中央处置室" title="中央处置室" onstart="" thumburl="panos/中央处置室.tiles/thumb.jpg" lat="" lng="" heading="">
-
+	<scene name="scene_中间走廊2" title="中间走廊2" onstart="" thumburl="panos/中间走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/中央处置室.tiles/preview.jpg" />
-
+		<preview url="panos/中间走廊2.tiles/preview.jpg" />
 		<image>
-			<cube url="panos/中央处置室.tiles/pano_%s.jpg" />
+			<cube url="panos/中间走廊2.tiles/pano_%s.jpg" />
 		</image>
-
+		<hotspot name="spot_中间走廊2_1" style="hotspot_arrow_white" ath="-100.0" atv="20.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
+		<hotspot name="spot_中间走廊2_2" style="hotspot_arrow_white" ath="10.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+		<hotspot name="spot_中间走廊2_3" style="hotspot_arrow_white" ath="-170.0" atv="10.0" linkedscene="scene_美容室" title="进入「美容室」"/>
 	</scene>
-
-	<scene name="scene_左边走廊1" title="左边走廊1" onstart="" thumburl="panos/左边走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
-
+	<scene name="scene_美容室" title="美容室" onstart="" thumburl="panos/美容室.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/左边走廊1.tiles/preview.jpg" />
-
+		<preview url="panos/美容室.tiles/preview.jpg" />
 		<image>
-			<cube url="panos/左边走廊1.tiles/pano_%s.jpg" />
+			<cube url="panos/美容室.tiles/pano_%s.jpg" />
 		</image>
-
+		<hotspot name="spot_美容室_1" style="hotspot_arrow_white" ath="165.0" atv="10.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
 	</scene>
-
+	<scene name="scene_诊室" title="诊室" onstart="" thumburl="panos/诊室.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<preview url="panos/诊室.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/诊室.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot_诊室_1" style="hotspot_arrow_white" ath="-50.0" atv="10.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
+		<hotspot name="spot_诊室_2" style="hotspot_arrow_white" ath="160.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+	</scene>
+	<scene name="scene_右边走廊1" title="右边走廊1" onstart="" thumburl="panos/右边走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<preview url="panos/右边走廊1.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/右边走廊1.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot_右边走廊1_1" style="hotspot_arrow_white" ath="-120.0" atv="20.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
+		<hotspot name="spot_右边走廊1_2" style="hotspot_arrow_white" ath="-70.0" atv="10.0" linkedscene="scene_诊室" title="进入「诊室」"/>
+		<hotspot name="spot_右边走廊1_3" style="hotspot_arrow_white" ath="60.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
+		<hotspot name="spot_右边走廊1_4" style="hotspot_arrow_white" ath="100.0" atv="10.0" linkedscene="scene_化验室" title="进入「化验室」"/>
+	</scene>
+	<scene name="scene_化验室" title="化验室" onstart="" thumburl="panos/化验室.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<preview url="panos/化验室.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/化验室.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot_化验室_1" style="hotspot_arrow_white" ath="-105.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+	</scene>
+	<scene name="scene_中央处置区" title="中央处置区" onstart="" thumburl="panos/中央处置区.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<preview url="panos/中央处置区.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/中央处置区.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot_中央处置区_1" style="hotspot_arrow_white" ath="-90.0" atv="20.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+		<hotspot name="spot_中央处置区_2" style="hotspot_arrow_white" ath="5.0" atv="10.0" linkedscene="scene_药房" title="进入「药房」"/>
+		<hotspot name="spot_中央处置区_3" style="hotspot_arrow_white" ath="115.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
+	</scene>
+	<scene name="scene_药房" title="药房" onstart="" thumburl="panos/药房.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<preview url="panos/药房.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/药房.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot_药房_1" style="hotspot_arrow_white" ath="11.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
+	</scene>
+	<scene name="scene_右边走廊2" title="右边走廊2" onstart="" thumburl="panos/右边走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<preview url="panos/右边走廊2.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/右边走廊2.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot_右边走廊2_1" style="hotspot_arrow_white" ath="170.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
+		<hotspot name="spot_右边走廊2_2" style="hotspot_arrow_white" ath="-20.0" atv="10.0" linkedscene="scene_手术室" title="进入「手术室」"/>
+		<hotspot name="spot_右边走廊2_3" style="hotspot_arrow_white" ath="-110.0" atv="10.0" linkedscene="scene_输液区" title="前往「输液区」"/>
+	</scene>
+	<scene name="scene_手术室" title="手术室" onstart="" thumburl="panos/手术室.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<preview url="panos/手术室.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/手术室.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot_手术室_1" style="hotspot_arrow_white" ath="115.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
+	</scene>
+	<scene name="scene_输液区" title="输液区" onstart="" thumburl="panos/输液区.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<preview url="panos/输液区.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/输液区.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot_输液区_1" style="hotspot_arrow_white" ath="130.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
+		<hotspot name="spot_输液区_2" style="hotspot_arrow_white" ath="-110.0" atv="10.0" linkedscene="scene_左边走廊2" title="前往「左边走廊」"/>
+	</scene>
 	<scene name="scene_左边走廊2" title="左边走廊2" onstart="" thumburl="panos/左边走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
-
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
 		<preview url="panos/左边走廊2.tiles/preview.jpg" />
-
 		<image>
 			<cube url="panos/左边走廊2.tiles/pano_%s.jpg" />
 		</image>
-
+		<hotspot name="spot_左边走廊2_1" style="hotspot_arrow_white" ath="-115.0" atv="10.0" linkedscene="scene_输液区" title="前往「输液区」"/>
+		<hotspot name="spot_左边走廊2_2" style="hotspot_arrow_white" ath="60.0" atv="10.0" linkedscene="scene_左边走廊1" title="前往「左边走廊」"/>
 	</scene>
-
-
+	<scene name="scene_左边走廊1" title="左边走廊1" onstart="" thumburl="panos/左边走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<preview url="panos/左边走廊1.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/左边走廊1.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot_左边走廊1_1" style="hotspot_arrow_white" ath="150.0" atv="30.0" linkedscene="scene_大厅" title="前往「大厅」"/>
+		<hotspot name="spot_左边走廊1_2" style="hotspot_arrow_white" ath="-30.0" atv="10.0" linkedscene="scene_左边走廊2" title="前往「左边走廊」"/>
+	</scene>
 </krpano>

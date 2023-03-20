@@ -1,0 +1,150 @@
+<krpano>
+
+    <action name="add_tooltip2">
+        txtadd(tooltipname, 'tooltip_', get(name));
+        addhotspot(get(tooltipname));
+        set(hotspot[get(tooltipname)].url,'%SWFPATH%/plugins/textfield.swf');
+        set(hotspot[get(tooltipname)].align,bottom);
+        set(hotspot[get(tooltipname)].edge,top);
+        set(hotspot[get(tooltipname)].distorted,true);
+        set(hotspot[get(tooltipname)].ath,get(ath));
+        set(hotspot[get(tooltipname)].atv,get(atv));
+        set(hotspot[get(tooltipname)].oy,50);
+        set(hotspot[get(tooltipname)].width,180);
+        set(hotspot[get(tooltipname)].autoheight,true);
+        set(hotspot[get(tooltipname)].background,false);
+        set(hotspot[get(tooltipname)].backgroundcolor,0x000000);
+        set(hotspot[get(tooltipname)].roundedge,10);
+        set(hotspot[get(tooltipname)].backgroundalpha,0.0);
+        set(hotspot[get(tooltipname)].border,false);
+        set(hotspot[get(tooltipname)].glow,4);
+        set(hotspot[get(tooltipname)].glowcolor,0xFFFFFF);
+        set(hotspot[get(tooltipname)].css,'text-align:center; color:#FFFFFF; font-family:Arial; font-weight:bold; font-size:20px;');
+        set(hotspot[get(tooltipname)].textshadow,1);
+        set(hotspot[get(tooltipname)].textshadowrange,6.0);
+        set(hotspot[get(tooltipname)].textshadowangle,90);
+        copy(hotspot[get(tooltipname)].html,scene[get(linkedscene)].title);
+        set(hotspot[get(tooltipname)].enabled,false);
+    </action>
+    <!-- 箭头上添加文字的部分 开始set(plugin[get(tooltipname)].backgroundalpha,0.0);控制背景颜色透明度 0.0 完全透明 0.5 透明度50% -->
+ 	<action name="add_all_the_time_tooltip">
+		txtadd(tooltipname, 'tooltip_', get(name));
+		addplugin(get(tooltipname));
+		txtadd(plugin[get(tooltipname)].parent, 'hotspot[', get(name), ']');
+		set(plugin[get(tooltipname)].url,'%SWFPATH%/plugins/textfield.swf');
+		set(plugin[get(tooltipname)].align,top);
+		set(plugin[get(tooltipname)].edge,bottom);
+		set(plugin[get(tooltipname)].x,0);
+		set(plugin[get(tooltipname)].y,0);
+		set(plugin[get(tooltipname)].autoweight,true);
+		set(plugin[get(tooltipname)].autoheight,true);
+		set(plugin[get(tooltipname)].background,true);
+		set(plugin[get(tooltipname)].backgroundcolor,0x000000);
+		set(plugin[get(tooltipname)].roundedge,15);
+		set(plugin[get(tooltipname)].backgroundalpha,0.5);
+		set(plugin[get(tooltipname)].border,true);
+		set(plugin[get(tooltipname)].padding,5);
+		set(plugin[get(tooltipname)].glow,4);
+		set(plugin[get(tooltipname)].glowcolor,0xFFFFFF);
+		set(plugin[get(tooltipname)].css,'text-align:center; color:#FFFFFF; font-family:Arial; font-weight:bold; font-size:14px;');
+		set(plugin[get(tooltipname)].textshadow,1);
+		set(plugin[get(tooltipname)].textshadowrange,6.0);
+		set(plugin[get(tooltipname)].textshadowangle,90);
+		copy(plugin[get(tooltipname)].html,title);
+		set(plugin[get(tooltipname)].enabled,false);
+    </action>
+    <action name="add_tooltip">
+        txtadd(tooltipname, 'tooltip_', get(name));
+		addplugin(get(tooltipname));
+		txtadd(plugin[get(tooltipname)].parent, 'hotspot[', get(name), ']');
+		set(plugin[get(tooltipname)].url,'%SWFPATH%/plugins/textfield.swf');
+		set(plugin[get(tooltipname)].align,top);
+		set(plugin[get(tooltipname)].edge,bottom);
+		set(plugin[get(tooltipname)].x,0);
+		set(plugin[get(tooltipname)].y,10);
+		set(plugin[get(tooltipname)].autoweight,true);
+		set(plugin[get(tooltipname)].autoheight,true);
+		set(plugin[get(tooltipname)].background,true);
+		set(plugin[get(tooltipname)].backgroundcolor,0x000000);
+		set(plugin[get(tooltipname)].roundedge,15);
+		set(plugin[get(tooltipname)].backgroundalpha,0.5);
+		set(plugin[get(tooltipname)].border,true);
+		set(plugin[get(tooltipname)].padding,5);
+		set(plugin[get(tooltipname)].glow,4);
+		set(plugin[get(tooltipname)].glowcolor,0xFFFFFF);
+		set(plugin[get(tooltipname)].css,'text-align:center; color:#FFFFFF; font-family:Arial; font-weight:bold; font-size:14px;');
+		set(plugin[get(tooltipname)].textshadow,1);
+		set(plugin[get(tooltipname)].textshadowrange,6.0);
+		set(plugin[get(tooltipname)].textshadowangle,90);
+		copy(plugin[get(tooltipname)].html,title);
+		set(plugin[get(tooltipname)].bgalpha,0.0);
+		set(plugin[get(tooltipname)].enabled,false);
+        set(plugin[get(tooltipname)].visible,true);
+    </action>>
+    <action name="delete_tooltip">
+        set(plugin[get(tooltipname)].visible,false);
+    </action>
+    <!-- 热点动态样式 时间属性 -->
+	<action name="hotspot_animate">
+		inc(frame,1,get(lastframe),0);
+		mul(ypos,frame,frameheight);
+		txtadd(crop,'0|',get(ypos),'|',get(framewidth),'|',get(frameheight));
+		delayedcall(0.03, if(loaded, hotspot_animate()) );
+	</action>
+    <!--热点样式，白色箭头-->
+    <style  name="hotspot_arrow_white" 
+            url="new_spotd1_gif.png" 
+            crop="0|0|128|128" 
+            framewidth="128" 
+            frameheight="128" 
+            frame="0" 
+            lastframe="24" 
+            scale="0.5" 
+            onclick="if(linkedscene, tween(scale,0.25,0.5); tween(oy,-20,0.5); tween(alpha,0,0.5); looktohotspot(); loadscene(get(linkedscene),null,MERGE,BLEND(1)); skin_updatescroll(); );" 
+            onhover="add_tooltip();"
+            onout="delete_tooltip();"
+            onloaded="hotspot_animate();" />
+
+    <!--焦点 嵌入页面-->
+	<style name="hotspot_info_iframe"
+        url="hotspot_info.png"
+        crop="0|0|128|128"
+        framewidth="128" frameheight="128" frame="0" lastframe="24" scale="0.5"
+        onclick="if(linkedscene, tween(scale,0.25,0.5); tween(oy,-20,0.5); tween(alpha,0,0.5); looktohotspot(); loadscene(get(linkedscene),null,MERGE,BLEND(1)); skin_updatescroll(); );js(layerManager.iframe(get(src),get(title)))"
+         onhover="add_tooltip();"
+            onout="delete_tooltip();"
+        onloaded="hotspot_animate();"
+	/>
+
+    <!--焦点 图片-->
+	<style name="hotspot_info_image"
+        url="hotspot_info.png"
+        crop="0|0|128|128"
+        framewidth="128" frameheight="128" frame="0" lastframe="24" scale="0.5"
+        onclick="if(linkedscene, tween(scale,0.25,0.5); tween(oy,-20,0.5); tween(alpha,0,0.5); looktohotspot(); loadscene(get(linkedscene),null,MERGE,BLEND(1)); skin_updatescroll();); js(layerManager.image(get(src),get(content)));"
+        onhover="if(skin_settings.tooltips_hotspots, if(linkedscene, showtext(get(scene[get(linkedscene)].title),SKIN_TOOLTIPS)) );"
+        onloaded="hotspot_animate();if(distorted,add_tooltip2(get(linkedscene),1),add_all_the_time_tooltip(get(linkedscene),1));"
+	/>
+
+    <!--热点样式，白色箭头， 方向左-->
+	<style name="hotspot_arrow_left"
+		   url="arrow_left.png"
+		   crop="0|0|128|128"
+		   framewidth="128" frameheight="128" frame="0" lastframe="24" scale="0.5"
+		   onclick="if(linkedscene, tween(scale,0.25,0.5); tween(oy,-20,0.5); tween(alpha,0,0.5); looktohotspot(); loadscene(get(linkedscene),null,MERGE,BLEND(1)); skin_updatescroll(); );"
+		   onhover="add_tooltip();"
+           onout="delete_tooltip();"
+		   onloaded="hotspot_animate();"
+	/>
+
+	<!--热点样式，白色箭头， 方向右-->
+	<style name="hotspot_arrow_right"
+		   url="arrow_right.png"
+		   crop="0|0|128|128"
+		   framewidth="128" frameheight="128" frame="0" lastframe="24" scale="0.5"
+		   onclick="if(linkedscene, tween(scale,0.25,0.5); tween(oy,-20,0.5); tween(alpha,0,0.5); looktohotspot(); loadscene(get(linkedscene),null,MERGE,BLEND(1)); skin_updatescroll(); );"
+		   onhover="add_tooltip();"
+           onout="delete_tooltip();"
+		   onloaded="hotspot_animate();"
+	/>
+</krpano>
