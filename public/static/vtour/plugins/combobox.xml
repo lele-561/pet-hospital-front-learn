@@ -1,8 +1,7 @@
 <krpano>
 
 	<!--
-		krpano 1.20.10 combobox.xml Plugin
-		https://krpano.com/plugins/combobox/
+		combobox.xml Plugin - krpano 1.19-pr16
 
 		- This plugin converts <combobox> elements in the current xml
 		  into <layer> container, scrollarea and textfield elements.
@@ -54,8 +53,8 @@
 
 	<!-- path to the scrollarea plugin -->
 	<combobox_scrollareaplugin
-		url.html5="%VIEWER%/plugins/scrollarea.js"
-		url.flash="%VIEWER%/plugins/scrollarea.swf"
+		url.html5="%SWFPATH%/plugins/scrollarea.js"
+		url.flash="%SWFPATH%/plugins/scrollarea.swf"
 		/>
 
 	<!-- core internal layer styles -->
@@ -79,33 +78,23 @@
 	</combobox_design>
 
 
-	
-	
-
 	<!-- internal events -->
 	<events name="combobox_xml_plugin_events" keep="true"
+	        onxmlcomplete="combobox_parse_xml_elements();"
 	        onresize="combobox_closelist();"
 	        />
 
+
 	<!-- krpano version check -->
 	<action name="combobox_versioncheck" autorun="preinit">
-		if(build LT '2020-11-01',
+		if(build LT '2017-09-13',
 			error('combobox.xml - too old krpano version!');
 			set(events[combobox_xml_plugin_events].name, null);
 			set(action[addComboboxLayer].content, '');
 			set(action[removeComboboxLayer].content, '');
-		  ,
-			combobox_xml_init();
 		);
 	</action>
 
-	<action name="combobox_xml_init">
-		<!-- set auto call again on next xml load -->
-		set(action[combobox_xml_init].autorun, onload);
-		
-		combobox_parse_xml_elements();
-	</action>
-	
 
 	<!-- convert all <combobox> elements to layers -->
 	<action name="combobox_parse_xml_elements" scope="localonly">
@@ -126,7 +115,7 @@
 					if(item_cnt GT 0,
 						def(item_i, integer, 0);
 						loop(item_i LT  item_cnt,
-							combobox_additem(get(ly.name), get(cb.item[get(item_i)].name), get(cb.item[get(item_i)].caption), get(cb.item[get(item_i)].onclick), get(cb.item[get(item_i)].oninit));
+							combobox_additem(get(ly.name), get(cb.item[get(item_i)].name), get(cb.item[get(item_i)].caption), get(cb.item[get(item_i)].onclick));
 							inc(item_i);
 						);
 					);
@@ -220,7 +209,7 @@
 
 
 	<!-- dynamically add items -->
-	<action name="combobox_additem" scope="localonly" args="cbname, itemname, itemcaption, itemonclick, itemoninit">
+	<action name="combobox_additem" scope="localonly" args="cbname, itemname, itemcaption, itemonclick">
 		copy(cb, global.layer[get(cbname)]);
 		
 		<!-- when no item name is set, generate an automatic one -->
@@ -245,10 +234,8 @@
 		copy(li.html, itemcaption);
 		set(li.onautosized, delayedcall(0,combobox_item_autosize_update()) );
 		set(li.onclick, combobox_item_onclick() );
-		if (isset(itemoninit), callwith(li, itemoninit));
 
 		copy(cb.item[get(itemname)].itemlayername, itemlayername);
-		copy(cb.item[get(itemname)].itemlayer, li);
 	</action>
 
 
@@ -401,10 +388,6 @@
 
 		copy(cb, global.layer[get(cbname)]);
 		copy(global.openedcombobox, cb);
-		
-		<!-- move to top -->
-		copy(cb.backupzorder, cb.zorder);
-		set(cb.zorder, 999);
 
 		<!-- find the available screen space above or below the combobox -->
 		calc(cbheight, 2*cb.margin + cb.autosize_max_h);
@@ -474,7 +457,7 @@
 			 rotating textfields (the marker symbol here) are not possible in
 			 flash (a flashplayer limitation), so use a rotated symbol instead.
 		-->
-		if(global.device.html5,
+		if(device.html5,
 			tween(global.layer[get(cbname)].marker.rotate, 90, get(cb.open_close_speed));
 		  ,
 			set(global.layer[get(cbname)].marker.html, '◀');
@@ -494,9 +477,6 @@
 			copy(cb, global.openedcombobox);
 			delete(global.openedcombobox);
 			
-			<!-- restore zorder -->
-			copy(cb.zorder, cb.backupzorder);
-			
 			<!-- clear the global onmousedown event -->
 			set(global.events[combobox_xml_plugin_events].onmousedown, null);
 
@@ -511,7 +491,7 @@
 			tween(global.layer[get(cb.name)].scrollarea.y, calc(-offset), get(cb.open_close_speed), default, global.layer[get(cb.name)].scrollarea.update(); );
 			tween(global.layer[get(cb.name)].marker.y, calc(cb.margin + offset + cb.autosize_max_h/2), get(cb.open_close_speed));
 			<!-- special html5/flash case: rotate marker or change symbol -->
-			if(global.device.html5,
+			if(device.html5,
 				tween(global.layer[get(cb.name)].marker.rotate, 0, get(cb.open_close_speed));
 			  ,
 				set(global.layer[get(cb.name)].marker.html, '▼');
