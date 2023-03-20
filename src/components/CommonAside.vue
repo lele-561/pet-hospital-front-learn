@@ -7,7 +7,8 @@
       alive-text-color="#C5A553"
       class="el-menu-vertical-demo"
       text-color="#fff">
-    <h3>虚拟宠物医院学习系统</h3>
+    <h2>虚拟宠物医院</h2>
+    <h3>学习系统</h3>
     <!-- :index跳转路由使用 -->
     <el-menu-item v-for="item in noChildren" :key="item.path" :index="item.path" @click="clickMenu(item)">
       <i :class="'el-icon-' + item.icon"></i>
@@ -43,13 +44,13 @@ export default {
           path: '/hospitalGuide',
           name: 'hospitalGuide_map',
           label: '医院导览',
-          icon: 's-grid',
+          icon: 'location',
           url: 'hospitalGuide/hospitalGuide'
         },
         {
           path: '/functionalLearning',
           label: '职能学习',
-          icon: 'data-board',
+          icon: 's-custom',
           children: [
             {
               path: '/',
@@ -63,7 +64,7 @@ export default {
         {
           path: '/onlineTest',
           label: '线上测试',
-          icon: 'data-board',
+          icon: 's-claim',
           children: [
             {
               path: '/',
@@ -110,10 +111,16 @@ export default {
   height: 100%;
   border: none;
 
+  h2 {
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+  }
+
   h3 {
     color: #fff;
     text-align: center;
-    line-height: 48px;
+    line-height: 10px;
   }
 }
 </style>
