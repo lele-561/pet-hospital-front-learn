@@ -6,7 +6,6 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 
 import HospitalMap from "../views/Detail/HospitalGuide/HospitalMap";
-import RoomDetail from "../views/Detail/HospitalGuide/RoomDetail";
 
 Vue.use(VueRouter)
 
@@ -31,11 +30,6 @@ const routes = [{
             path: 'hospitalGuide/map',
             name: 'hospitalGuide_map',
             component: HospitalMap
-        },
-        {
-            path: 'hospitalGuide/room',
-            name: 'hospitalGuide_room',
-            component: RoomDetail
         },
     ]
 },

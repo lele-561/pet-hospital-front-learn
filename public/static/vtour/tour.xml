@@ -70,14 +70,132 @@
 		if(startactions !== null, startactions() );
 	</action>
 
+
+<!-- 热点点击事件 -->
+	<action name="onShowDec">
+	<!-- js(test(get(name))); -->
+		js(hotspotClick(get(name)));
+		<!-- jsget(result,'test(get(name))'); -->
+		<!-- openurl('http://victu360.com',_self); -->
+
+		<!-- set(layer[hotspot-dec-skin].visible,true);
+		set(layer[dec-con].html,get(content)); -->
+	</action>
+
+	<action name="close_skin">
+		set(layer[hotspot-dec-skin].visible,false);
+	</action>
+
+	<!-- 文物介绍的背景  -->
+	<layer name="hotspot-dec-skin" keep="true" type="container" bgcolor="0x000000" bgalpha="0.8" align="top" y="0" width="100%" height="100%" enabled="true" visible="false" zorder="2">
+		<layer name="close-skin" keep="true" type="image" align="lefttop" x="5%" y="5%" url="image/close.png" onclick="close_skin();"
+			parent="layer[hotspot-dec-skin]"/>
+		<layer name="img-skin" keep="true" type="container" align="lefttop" x="10%" y="10%" width="50%" height="50%">
+			<layer name="img-con" keep="true" type="image" align="lefttop" x="10%" y="20%" url="image/bg-index.png" width="60%" height="50%"/>
+		</layer>
+
+		<layer name="line-skin" keep="true" type="container" bgcolor="0xFFFFFF" bgalpha="1" align="center"  width="4" height="85%" enabled="true"/>
+
+		<layer name="dec-skin" keep="true" type="container" align="lefttop" x="55%" y="5%" width="50%" height="100%">
+			<layer name="dec-con" keep="true" type="text" align="lefttop" x="30" y="80"
+			css="font-family:Arial; font-size:20px; color:#fff;"
+			bgcolor="0x000000" bgalpha="0.5" />
+		</layer>
+
+	</layer>
+
+	<!-- 添加自定义地图start -->
+	<!-- 地图部分 -->
+	<layer name="map" url="common/map/inmap.png" keep="true" handcursor="false" capture="false"
+	       align="lefttop"
+		   x="0"
+		   y="0"
+	       scale="0.15" scalechildren="true"
+	       onclick="openmap();"
+	       >
+		<!-- 地图点图像部分 url可以设置 用style统一处理 所有的layer都加载同一个名为mapspot的style 注意这里spot的标号代表下面scene场景的顺序0~13，提高可读性 -->
+		<layer name="spot0" style="mapspot" x="1330" y="900" zorder="1" onclick="mapspot_loadscene();" />
+		<layer name="spot3" style="mapspot" x="1300" y="230" zorder="1" onclick="mapspot_loadscene();" />
+		<layer name="spot4" style="mapspot" x="900" y="600" zorder="1" onclick="mapspot_loadscene();" />
+		<layer name="spot6" style="mapspot" x="900" y="100" zorder="1" onclick="mapspot_loadscene();" />
+		<layer name="spot7" style="mapspot" x="750" y="400" zorder="1" onclick="mapspot_loadscene();" />
+		<layer name="spot8" style="mapspot" x="640" y="600" zorder="1" onclick="mapspot_loadscene();" />
+		<layer name="spot10" style="mapspot" x="300" y="210" zorder="1" onclick="mapspot_loadscene();" />
+		<layer name="spot11" style="mapspot" x="400" y="750" zorder="1" onclick="mapspot_loadscene();" />
+	</layer>
+
+	<style name="mapspot" keep="true" url="common/map/location.png" parent="map" align="lefttop" edge="center" scale.mobile="2" />
+
+	<!-- 地图打开部分-缩放到100%（如果屏幕小的话则更小） -->
+	<action name="openmap">
+		set(layer[map].onclick, closemap(); );
+		layer[map].changeorigin(center,center);
+
+		set(bigscale,1);
+		if(layer[map].imagewidth GT stagewidth, div(bigscale, stagewidth, layer[map].imagewidth); );
+
+		tween(layer[map].x, 0);
+		tween(layer[map].y, 0);
+		tween(layer[map].scale, 0.4);
+	</action>
+	<!-- 地图关闭-缩放到自身尺寸的四分之一 -->
+	<action name="closemap">
+		set(layer[map].onclick, openmap(); );
+		layer[map].changeorigin(lefttop,lefttop);
+
+		tween(layer[map].x, 0);
+		tween(layer[map].y, 0);
+		tween(layer[map].scale, 0.15);
+	</action>
+
+	<!-- 点击地图时，执行的动作 -->
+	<action name="mapspot_loadscene">
+		subtxt(spotid,get(name),4,2);
+
+		if(layer[map].scale GT 0.15,
+			<!-- 当地图放大时需要执行更多特殊的动作，缩小地图等 -->
+			set(layer[map].enabled, false);
+			tween(layer[map].alpha, 0.0, 0.15, default,
+
+			if(spotid != scene[get(xml.scene)].index,
+			  loadscene(get(scene[get(spotid)].name),null,MERGE,BLEND(1));
+			  );
+
+				set(layer[map].onclick, openmap(); );
+				layer[map].changeorigin(lefttop,lefttop);
+
+				set(layer[map].x, 0);
+				set(layer[map].y, 0);
+				set(layer[map].scale, 0.15);
+
+				set(events[sceneload].onloadcomplete,
+					delayedcall(1,
+						tween(layer[map].alpha, 1.0, 0.5, default, set(layer[map].enabled, true); );
+					  );
+				  );
+			  );
+		  ,
+			<!-- 小地图时只需要载入场景 -->
+			if(spotid != scene[get(xml.scene)].index,
+			  loadscene(get(scene[get(spotid)].name),null,MERGE,BLEND(1));
+			  );
+
+		  );
+	</action>
+	<!-- 添加自定义地图end -->
+
+	<!-- 全景导览图的场景 -->
 	<scene name="scene_大厅" title="大厅" onstart="" thumburl="panos/大厅.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
 		<preview url="panos/大厅.tiles/preview.jpg" />
 		<image>
 			<cube url="panos/大厅.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_大厅_1" style="hotspot_arrow_white" ath="180.0" atv="20.0" linkedscene="scene_左边走廊1" title="前往「左边走廊」"/>
-		<hotspot name="spot_大厅_2" style="hotspot_arrow_white" ath="-90.0" atv="20.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
+		<hotspot name="spot_0_1" style="hotspot_arrow_white" ath="180.0" atv="20.0" linkedscene="scene_左边走廊1" title="前往「左边走廊」"/>
+		<hotspot name="spot_0_2" style="hotspot_arrow_white" ath="-90.0" atv="20.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
+<!--		<hotspot name="spot_0_2" style="hotspot_info_iframe" ath="-58.723" atv="-3.293" title="我是文物1"  onclick="onShowDec"/>-->
+<!--		<hotspot name="spot_0_3" style="hotspot_info_iframe" ath="18.723" atv="-3.293" title="我是文物2" content="价值连城的文物" onclick="onShowDec" />-->
+
 	</scene>
 	<scene name="scene_中间走廊1" title="中间走廊1" onstart="" thumburl="panos/中间走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -85,9 +203,9 @@
 		<image>
 			<cube url="panos/中间走廊1.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_中间走廊1_1" style="hotspot_arrow_white" ath="-15.0" atv="20.0" linkedscene="scene_大厅" title="前往「大厅」"/>
-		<hotspot name="spot_中间走廊1_2" style="hotspot_arrow_white" ath="70.0" atv="10.0" linkedscene="scene_诊室" title="进入「诊室」"/>
-		<hotspot name="spot_中间走廊1_3" style="hotspot_arrow_white" ath="150.0" atv="10.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
+		<hotspot name="spot_1_1" style="hotspot_arrow_white" ath="-15.0" atv="20.0" linkedscene="scene_大厅" title="前往「大厅」"/>
+		<hotspot name="spot_1_2" style="hotspot_arrow_white" ath="70.0" atv="10.0" linkedscene="scene_诊室" title="进入「诊室」"/>
+		<hotspot name="spot_1_3" style="hotspot_arrow_white" ath="150.0" atv="10.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
 	</scene>
 	<scene name="scene_中间走廊2" title="中间走廊2" onstart="" thumburl="panos/中间走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -95,9 +213,9 @@
 		<image>
 			<cube url="panos/中间走廊2.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_中间走廊2_1" style="hotspot_arrow_white" ath="-100.0" atv="20.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
-		<hotspot name="spot_中间走廊2_2" style="hotspot_arrow_white" ath="10.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
-		<hotspot name="spot_中间走廊2_3" style="hotspot_arrow_white" ath="-170.0" atv="10.0" linkedscene="scene_美容室" title="进入「美容室」"/>
+		<hotspot name="spot_2_1" style="hotspot_arrow_white" ath="-100.0" atv="20.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
+		<hotspot name="spot_2_2" style="hotspot_arrow_white" ath="10.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+		<hotspot name="spot_2_3" style="hotspot_arrow_white" ath="-170.0" atv="10.0" linkedscene="scene_美容室" title="进入「美容室」"/>
 	</scene>
 	<scene name="scene_美容室" title="美容室" onstart="" thumburl="panos/美容室.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -105,7 +223,7 @@
 		<image>
 			<cube url="panos/美容室.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_美容室_1" style="hotspot_arrow_white" ath="165.0" atv="10.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
+		<hotspot name="spot_3_1" style="hotspot_arrow_white" ath="165.0" atv="10.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
 	</scene>
 	<scene name="scene_诊室" title="诊室" onstart="" thumburl="panos/诊室.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -113,8 +231,8 @@
 		<image>
 			<cube url="panos/诊室.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_诊室_1" style="hotspot_arrow_white" ath="-50.0" atv="10.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
-		<hotspot name="spot_诊室_2" style="hotspot_arrow_white" ath="160.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+		<hotspot name="spot_4_1" style="hotspot_arrow_white" ath="-50.0" atv="10.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
+		<hotspot name="spot_4_2" style="hotspot_arrow_white" ath="160.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
 	</scene>
 	<scene name="scene_右边走廊1" title="右边走廊1" onstart="" thumburl="panos/右边走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -122,10 +240,10 @@
 		<image>
 			<cube url="panos/右边走廊1.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_右边走廊1_1" style="hotspot_arrow_white" ath="-120.0" atv="20.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
-		<hotspot name="spot_右边走廊1_2" style="hotspot_arrow_white" ath="-70.0" atv="10.0" linkedscene="scene_诊室" title="进入「诊室」"/>
-		<hotspot name="spot_右边走廊1_3" style="hotspot_arrow_white" ath="60.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
-		<hotspot name="spot_右边走廊1_4" style="hotspot_arrow_white" ath="100.0" atv="10.0" linkedscene="scene_化验室" title="进入「化验室」"/>
+		<hotspot name="spot_5_1" style="hotspot_arrow_white" ath="-120.0" atv="20.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
+		<hotspot name="spot_5_2" style="hotspot_arrow_white" ath="-70.0" atv="10.0" linkedscene="scene_诊室" title="进入「诊室」"/>
+		<hotspot name="spot_5_3" style="hotspot_arrow_white" ath="60.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
+		<hotspot name="spot_5_4" style="hotspot_arrow_white" ath="100.0" atv="10.0" linkedscene="scene_化验室" title="进入「化验室」"/>
 	</scene>
 	<scene name="scene_化验室" title="化验室" onstart="" thumburl="panos/化验室.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -133,7 +251,7 @@
 		<image>
 			<cube url="panos/化验室.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_化验室_1" style="hotspot_arrow_white" ath="-105.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+		<hotspot name="spot_6_1" style="hotspot_arrow_white" ath="-105.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
 	</scene>
 	<scene name="scene_中央处置区" title="中央处置区" onstart="" thumburl="panos/中央处置区.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -141,9 +259,9 @@
 		<image>
 			<cube url="panos/中央处置区.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_中央处置区_1" style="hotspot_arrow_white" ath="-90.0" atv="20.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
-		<hotspot name="spot_中央处置区_2" style="hotspot_arrow_white" ath="5.0" atv="10.0" linkedscene="scene_药房" title="进入「药房」"/>
-		<hotspot name="spot_中央处置区_3" style="hotspot_arrow_white" ath="115.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
+		<hotspot name="spot_7_1" style="hotspot_arrow_white" ath="-90.0" atv="20.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+		<hotspot name="spot_7_2" style="hotspot_arrow_white" ath="5.0" atv="10.0" linkedscene="scene_药房" title="进入「药房」"/>
+		<hotspot name="spot_7_3" style="hotspot_arrow_white" ath="115.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
 	</scene>
 	<scene name="scene_药房" title="药房" onstart="" thumburl="panos/药房.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -151,7 +269,7 @@
 		<image>
 			<cube url="panos/药房.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_药房_1" style="hotspot_arrow_white" ath="11.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
+		<hotspot name="spot_8_1" style="hotspot_arrow_white" ath="11.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
 	</scene>
 	<scene name="scene_右边走廊2" title="右边走廊2" onstart="" thumburl="panos/右边走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -159,9 +277,9 @@
 		<image>
 			<cube url="panos/右边走廊2.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_右边走廊2_1" style="hotspot_arrow_white" ath="170.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
-		<hotspot name="spot_右边走廊2_2" style="hotspot_arrow_white" ath="-20.0" atv="10.0" linkedscene="scene_手术室" title="进入「手术室」"/>
-		<hotspot name="spot_右边走廊2_3" style="hotspot_arrow_white" ath="-110.0" atv="10.0" linkedscene="scene_输液区" title="前往「输液区」"/>
+		<hotspot name="spot_9_1" style="hotspot_arrow_white" ath="170.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
+		<hotspot name="spot_9_2" style="hotspot_arrow_white" ath="-20.0" atv="10.0" linkedscene="scene_手术室" title="进入「手术室」"/>
+		<hotspot name="spot_9_3" style="hotspot_arrow_white" ath="-110.0" atv="10.0" linkedscene="scene_输液区" title="前往「输液区」"/>
 	</scene>
 	<scene name="scene_手术室" title="手术室" onstart="" thumburl="panos/手术室.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -169,7 +287,7 @@
 		<image>
 			<cube url="panos/手术室.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_手术室_1" style="hotspot_arrow_white" ath="115.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
+		<hotspot name="spot_10_1" style="hotspot_arrow_white" ath="115.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
 	</scene>
 	<scene name="scene_输液区" title="输液区" onstart="" thumburl="panos/输液区.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -177,8 +295,8 @@
 		<image>
 			<cube url="panos/输液区.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_输液区_1" style="hotspot_arrow_white" ath="130.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
-		<hotspot name="spot_输液区_2" style="hotspot_arrow_white" ath="-110.0" atv="10.0" linkedscene="scene_左边走廊2" title="前往「左边走廊」"/>
+		<hotspot name="spot_11_1" style="hotspot_arrow_white" ath="130.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
+		<hotspot name="spot_11_2" style="hotspot_arrow_white" ath="-110.0" atv="10.0" linkedscene="scene_左边走廊2" title="前往「左边走廊」"/>
 	</scene>
 	<scene name="scene_左边走廊2" title="左边走廊2" onstart="" thumburl="panos/左边走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -186,8 +304,8 @@
 		<image>
 			<cube url="panos/左边走廊2.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_左边走廊2_1" style="hotspot_arrow_white" ath="-115.0" atv="10.0" linkedscene="scene_输液区" title="前往「输液区」"/>
-		<hotspot name="spot_左边走廊2_2" style="hotspot_arrow_white" ath="60.0" atv="10.0" linkedscene="scene_左边走廊1" title="前往「左边走廊」"/>
+		<hotspot name="spot_12_1" style="hotspot_arrow_white" ath="-115.0" atv="10.0" linkedscene="scene_输液区" title="前往「输液区」"/>
+		<hotspot name="spot_12_2" style="hotspot_arrow_white" ath="60.0" atv="10.0" linkedscene="scene_左边走廊1" title="前往「左边走廊」"/>
 	</scene>
 	<scene name="scene_左边走廊1" title="左边走廊1" onstart="" thumburl="panos/左边走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -195,7 +313,7 @@
 		<image>
 			<cube url="panos/左边走廊1.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_左边走廊1_1" style="hotspot_arrow_white" ath="150.0" atv="30.0" linkedscene="scene_大厅" title="前往「大厅」"/>
-		<hotspot name="spot_左边走廊1_2" style="hotspot_arrow_white" ath="-30.0" atv="10.0" linkedscene="scene_左边走廊2" title="前往「左边走廊」"/>
+		<hotspot name="spot_13_1" style="hotspot_arrow_white" ath="150.0" atv="30.0" linkedscene="scene_大厅" title="前往「大厅」"/>
+		<hotspot name="spot_13_2" style="hotspot_arrow_white" ath="-30.0" atv="10.0" linkedscene="scene_左边走廊2" title="前往「左边走廊」"/>
 	</scene>
 </krpano>
