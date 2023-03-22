@@ -34,7 +34,7 @@ export default {
 
 <style lang="less" scoped>
 .el-header {
-  background-image: linear-gradient(to right, #9795f0 0%, #fbc8d4 100%);
+  background-image: linear-gradient(to left, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
 }
 
 .el-main {
