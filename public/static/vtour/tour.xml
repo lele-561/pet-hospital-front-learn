@@ -30,7 +30,7 @@
 	               loadscene_flags="MERGE"
 	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
 	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
-	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5, 0, 0.75, linear)"
 	               loadingtext="loading..."
 	               layout_width="100%"
 	               layout_maxwidth="814"
@@ -67,42 +67,39 @@
 	<action name="startup" autorun="onstart">
 		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
 		loadscene(get(startscene), null, MERGE);
+		js(sceneClick(get(startscene)));
 		if(startactions !== null, startactions() );
 	</action>
 
-
-<!-- 热点点击事件 -->
-	<action name="onShowDec">
-	<!-- js(test(get(name))); -->
+	<!-- 热点点击事件 -->
+	<action name="onShowHotspot">
 		js(hotspotClick(get(name)));
-		<!-- jsget(result,'test(get(name))'); -->
-		<!-- openurl('http://victu360.com',_self); -->
-
-		<!-- set(layer[hotspot-dec-skin].visible,true);
-		set(layer[dec-con].html,get(content)); -->
+	</action>
+	<!-- 跳转scene事件	-->
+	<action name="onShowScene">
+		js(sceneClick(get(name)));
 	</action>
 
-	<action name="close_skin">
-		set(layer[hotspot-dec-skin].visible,false);
-	</action>
+<!--	<action name="close_skin">-->
+<!--		set(layer[hotspot-dec-skin].visible,false);-->
+<!--	</action>-->
 
-	<!-- 文物介绍的背景  -->
-	<layer name="hotspot-dec-skin" keep="true" type="container" bgcolor="0x000000" bgalpha="0.8" align="top" y="0" width="100%" height="100%" enabled="true" visible="false" zorder="2">
-		<layer name="close-skin" keep="true" type="image" align="lefttop" x="5%" y="5%" url="image/close.png" onclick="close_skin();"
-			parent="layer[hotspot-dec-skin]"/>
-		<layer name="img-skin" keep="true" type="container" align="lefttop" x="10%" y="10%" width="50%" height="50%">
-			<layer name="img-con" keep="true" type="image" align="lefttop" x="10%" y="20%" url="image/bg-index.png" width="60%" height="50%"/>
-		</layer>
+<!--	&lt;!&ndash; 文物介绍的背景  &ndash;&gt;-->
+<!--	<layer name="hotspot-dec-skin" keep="true" type="container" bgcolor="0x000000" bgalpha="0.8" align="top" y="0" width="100%" height="100%" enabled="true" visible="false" zorder="2">-->
+<!--		<layer name="close-skin" keep="true" type="image" align="lefttop" x="5%" y="5%" url="image/close.png" onclick="close_skin();"-->
+<!--			parent="layer[hotspot-dec-skin]"/>-->
+<!--		<layer name="img-skin" keep="true" type="container" align="lefttop" x="10%" y="10%" width="50%" height="50%">-->
+<!--			<layer name="img-con" keep="true" type="image" align="lefttop" x="10%" y="20%" url="image/bg-index.png" width="60%" height="50%"/>-->
+<!--		</layer>-->
 
-		<layer name="line-skin" keep="true" type="container" bgcolor="0xFFFFFF" bgalpha="1" align="center"  width="4" height="85%" enabled="true"/>
+<!--		<layer name="line-skin" keep="true" type="container" bgcolor="0xFFFFFF" bgalpha="1" align="center"  width="4" height="85%" enabled="true"/>-->
 
-		<layer name="dec-skin" keep="true" type="container" align="lefttop" x="55%" y="5%" width="50%" height="100%">
-			<layer name="dec-con" keep="true" type="text" align="lefttop" x="30" y="80"
-			css="font-family:Arial; font-size:20px; color:#fff;"
-			bgcolor="0x000000" bgalpha="0.5" />
-		</layer>
-
-	</layer>
+<!--		<layer name="dec-skin" keep="true" type="container" align="lefttop" x="55%" y="5%" width="50%" height="100%">-->
+<!--			<layer name="dec-con" keep="true" type="text" align="lefttop" x="30" y="80"-->
+<!--			css="font-family:Arial; font-size:20px; color:#fff;"-->
+<!--			bgcolor="0x000000" bgalpha="0.5" />-->
+<!--		</layer>-->
+<!--	</layer>-->
 
 	<!-- 添加自定义地图start -->
 	<!-- 地图部分 -->
@@ -114,14 +111,14 @@
 	       onclick="openmap();"
 	       >
 		<!-- 地图点图像部分 url可以设置 用style统一处理 所有的layer都加载同一个名为mapspot的style 注意这里spot的标号代表下面scene场景的顺序0~13，提高可读性 -->
-		<layer name="spot0" style="mapspot" x="1330" y="900" zorder="1" onclick="mapspot_loadscene();" />
-		<layer name="spot3" style="mapspot" x="1300" y="230" zorder="1" onclick="mapspot_loadscene();" />
-		<layer name="spot4" style="mapspot" x="900" y="600" zorder="1" onclick="mapspot_loadscene();" />
-		<layer name="spot6" style="mapspot" x="900" y="100" zorder="1" onclick="mapspot_loadscene();" />
-		<layer name="spot7" style="mapspot" x="750" y="400" zorder="1" onclick="mapspot_loadscene();" />
-		<layer name="spot8" style="mapspot" x="640" y="600" zorder="1" onclick="mapspot_loadscene();" />
-		<layer name="spot10" style="mapspot" x="300" y="210" zorder="1" onclick="mapspot_loadscene();" />
-		<layer name="spot11" style="mapspot" x="400" y="750" zorder="1" onclick="mapspot_loadscene();" />
+		<layer name="spot0_map_大厅" style="mapspot" x="1330" y="900" zorder="1" onclick="onShowScene(); mapspot_loadscene();" />
+		<layer name="spot3_map_美容室" style="mapspot" x="1300" y="230" zorder="1" onclick="onShowScene(); mapspot_loadscene();" />
+		<layer name="spot4_map_诊室" style="mapspot" x="900" y="600" zorder="1" onclick="onShowScene(); mapspot_loadscene();" />
+		<layer name="spot6_map_化验室" style="mapspot" x="900" y="100" zorder="1" onclick="onShowScene(); mapspot_loadscene();" />
+		<layer name="spot7_map_中央处置区" style="mapspot" x="750" y="400" zorder="1" onclick="onShowScene(); mapspot_loadscene();" />
+		<layer name="spot8_map_药房" style="mapspot" x="640" y="600" zorder="1" onclick="onShowScene(); mapspot_loadscene();" />
+		<layer name="spot10_map_手术室" style="mapspot" x="300" y="210" zorder="1" onclick="onShowScene(); mapspot_loadscene();" />
+		<layer name="spot11_map_输液区" style="mapspot" x="400" y="750" zorder="1" onclick="onShowScene(); mapspot_loadscene();" />
 	</layer>
 
 	<style name="mapspot" keep="true" url="common/map/location.png" parent="map" align="lefttop" edge="center" scale.mobile="2" />
@@ -147,7 +144,6 @@
 		tween(layer[map].y, 0);
 		tween(layer[map].scale, 0.15);
 	</action>
-
 	<!-- 点击地图时，执行的动作 -->
 	<action name="mapspot_loadscene">
 		subtxt(spotid,get(name),4,2);
@@ -160,7 +156,6 @@
 			if(spotid != scene[get(xml.scene)].index,
 			  loadscene(get(scene[get(spotid)].name),null,MERGE,BLEND(1));
 			  );
-
 				set(layer[map].onclick, openmap(); );
 				layer[map].changeorigin(lefttop,lefttop);
 
@@ -179,7 +174,6 @@
 			if(spotid != scene[get(xml.scene)].index,
 			  loadscene(get(scene[get(spotid)].name),null,MERGE,BLEND(1));
 			  );
-
 		  );
 	</action>
 	<!-- 添加自定义地图end -->
@@ -193,9 +187,6 @@
 		</image>
 		<hotspot name="spot_0_1" style="hotspot_arrow_white" ath="180.0" atv="20.0" linkedscene="scene_左边走廊1" title="前往「左边走廊」"/>
 		<hotspot name="spot_0_2" style="hotspot_arrow_white" ath="-90.0" atv="20.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
-<!--		<hotspot name="spot_0_2" style="hotspot_info_iframe" ath="-58.723" atv="-3.293" title="我是文物1"  onclick="onShowDec"/>-->
-<!--		<hotspot name="spot_0_3" style="hotspot_info_iframe" ath="18.723" atv="-3.293" title="我是文物2" content="价值连城的文物" onclick="onShowDec" />-->
-
 	</scene>
 	<scene name="scene_中间走廊1" title="中间走廊1" onstart="" thumburl="panos/中间走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -224,6 +215,7 @@
 			<cube url="panos/美容室.tiles/pano_%s.jpg" />
 		</image>
 		<hotspot name="spot_3_1" style="hotspot_arrow_white" ath="165.0" atv="10.0" linkedscene="scene_中间走廊2" title="前往「中间走廊」"/>
+		<hotspot name="spot_3_烘干箱" style="hotspot_info_iframe" ath="-50.0" atv="10.0" title="烘干箱" onclick="onShowHotspot"/>
 	</scene>
 	<scene name="scene_诊室" title="诊室" onstart="" thumburl="panos/诊室.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -233,6 +225,7 @@
 		</image>
 		<hotspot name="spot_4_1" style="hotspot_arrow_white" ath="-50.0" atv="10.0" linkedscene="scene_中间走廊1" title="前往「中间走廊」"/>
 		<hotspot name="spot_4_2" style="hotspot_arrow_white" ath="160.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+		<hotspot name="spot_4_听诊器" style="hotspot_info_iframe" ath="113.0" atv="-5.0" title="听诊器" onclick="onShowHotspot"/>
 	</scene>
 	<scene name="scene_右边走廊1" title="右边走廊1" onstart="" thumburl="panos/右边走廊1.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -244,6 +237,8 @@
 		<hotspot name="spot_5_2" style="hotspot_arrow_white" ath="-70.0" atv="10.0" linkedscene="scene_诊室" title="进入「诊室」"/>
 		<hotspot name="spot_5_3" style="hotspot_arrow_white" ath="60.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
 		<hotspot name="spot_5_4" style="hotspot_arrow_white" ath="100.0" atv="10.0" linkedscene="scene_化验室" title="进入「化验室」"/>
+		<hotspot name="spot_5_住院笼" style="hotspot_info_iframe" ath="30.0" atv="-10.0" title="住院笼" onclick="onShowHotspot"/>
+		<hotspot name="spot_5_宠物洗牙机" style="hotspot_info_iframe" ath="-95.0" atv="15.0" title="宠物洗牙机" onclick="onShowHotspot"/>
 	</scene>
 	<scene name="scene_化验室" title="化验室" onstart="" thumburl="panos/化验室.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -251,7 +246,10 @@
 		<image>
 			<cube url="panos/化验室.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="spot_6_1" style="hotspot_arrow_white" ath="-105.0" atv="10.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+		<hotspot name="spot_6_1" style="hotspot_arrow_white" ath="-105.0" atv="20.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
+		<hotspot name="spot_6_电子显微镜" style="hotspot_info_iframe" ath="105.0" atv="-5.0" title="电子显微镜" onclick="onShowHotspot"/>
+		<hotspot name="spot_6_电解质分析仪" style="hotspot_info_iframe" ath="152.0" atv="-5.0" title="电解质分析仪" onclick="onShowHotspot"/>
+		<hotspot name="spot_6_血液分析仪" style="hotspot_info_iframe" ath="180.0" atv="-10.0" title="血液分析仪" onclick="onShowHotspot"/>
 	</scene>
 	<scene name="scene_中央处置区" title="中央处置区" onstart="" thumburl="panos/中央处置区.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -262,6 +260,11 @@
 		<hotspot name="spot_7_1" style="hotspot_arrow_white" ath="-90.0" atv="20.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
 		<hotspot name="spot_7_2" style="hotspot_arrow_white" ath="5.0" atv="10.0" linkedscene="scene_药房" title="进入「药房」"/>
 		<hotspot name="spot_7_3" style="hotspot_arrow_white" ath="115.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
+		<hotspot name="spot_7_氧气吸氧舱" style="hotspot_info_iframe" ath="-25.0" atv="-15.0" title="氧气吸氧舱" onclick="onShowHotspot"/>
+		<hotspot name="spot_7_宠物输液泵" style="hotspot_info_iframe" ath="-30.0" atv="15.0" title="宠物输液泵" onclick="onShowHotspot"/>
+		<hotspot name="spot_7_激光理疗仪" style="hotspot_info_iframe" ath="58.0" atv="-5.0" title="激光理疗仪" onclick="onShowHotspot"/>
+		<hotspot name="spot_7_供氧机" style="hotspot_info_iframe" ath="55.0" atv="30.0" title="供氧机" onclick="onShowHotspot"/>
+		<hotspot name="spot_7_宠物处置台" style="hotspot_info_iframe" ath="80.0" atv="10.0" title="宠物处置台" onclick="onShowHotspot"/>
 	</scene>
 	<scene name="scene_药房" title="药房" onstart="" thumburl="panos/药房.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -270,6 +273,7 @@
 			<cube url="panos/药房.tiles/pano_%s.jpg" />
 		</image>
 		<hotspot name="spot_8_1" style="hotspot_arrow_white" ath="11.0" atv="10.0" linkedscene="scene_中央处置区" title="前往「中央处置区」"/>
+		<hotspot name="spot_8_B超机" style="hotspot_info_iframe" ath="55.0" atv="-3.0" title="B超机" onclick="onShowHotspot"/>
 	</scene>
 	<scene name="scene_右边走廊2" title="右边走廊2" onstart="" thumburl="panos/右边走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -288,6 +292,9 @@
 			<cube url="panos/手术室.tiles/pano_%s.jpg" />
 		</image>
 		<hotspot name="spot_10_1" style="hotspot_arrow_white" ath="115.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
+		<hotspot name="spot_10_手术灯" style="hotspot_info_iframe" ath="35.0" atv="-20.0" title="手术灯" onclick="onShowHotspot"/>
+		<hotspot name="spot_10_麻醉机" style="hotspot_info_iframe" ath="55.0" atv="-10.0" title="麻醉机" onclick="onShowHotspot"/>
+		<hotspot name="spot_10_手术台" style="hotspot_info_iframe" ath="45.0" atv="-3.0" title="手术台" onclick="onShowHotspot"/>
 	</scene>
 	<scene name="scene_输液区" title="输液区" onstart="" thumburl="panos/输液区.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
@@ -297,6 +304,7 @@
 		</image>
 		<hotspot name="spot_11_1" style="hotspot_arrow_white" ath="130.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
 		<hotspot name="spot_11_2" style="hotspot_arrow_white" ath="-110.0" atv="10.0" linkedscene="scene_左边走廊2" title="前往「左边走廊」"/>
+		<hotspot name="spot_11_宠物输液泵" style="hotspot_info_iframe" ath="35.0" atv="-10.0" title="宠物输液泵" onclick="onShowHotspot"/>
 	</scene>
 	<scene name="scene_左边走廊2" title="左边走廊2" onstart="" thumburl="panos/左边走廊2.tiles/thumb.jpg" lat="" lng="" heading="">
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
