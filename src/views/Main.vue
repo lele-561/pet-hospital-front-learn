@@ -1,5 +1,5 @@
 <template>
-  <el-container style="background-color:#eef2f5;height:100%">
+  <el-container style="height:100%">
     <el-aside width="auto">
       <common-aside></common-aside>
     </el-aside>
@@ -15,7 +15,6 @@
     </el-container>
   </el-container>
 </template>
-
 
 <script>
 import CommonAside from '../components/CommonAside.vue'
@@ -35,12 +34,10 @@ export default {
 
 <style lang="less" scoped>
 .el-header {
-  background-image: linear-gradient(to left, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+  background-image: linear-gradient(to right, #9795f0 0%, #fbc8d4 100%);
 }
-
 
 .el-main {
   padding-top: 0;
 }
-
 </style>
