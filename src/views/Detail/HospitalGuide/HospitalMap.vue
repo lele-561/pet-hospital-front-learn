@@ -100,7 +100,6 @@ export default {
             else this.processContent = ''
           }
         }
-        console.log(this.processContent)
       }
     },
 
