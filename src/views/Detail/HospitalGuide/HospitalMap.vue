@@ -25,12 +25,12 @@
           <el-descriptions-item label="负责人">
             <el-tag v-for="item in department.directors" :key="item">{{ item }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="介绍">{{ department.function }}</el-descriptions-item>
+          <el-descriptions-item label="介绍">{{ department.functions }}</el-descriptions-item>
         </el-descriptions>
         <el-descriptions class="equipment" title="现在选择的器械是：" :style="{display: equipmentShow}" size="middle" :column=1
                          border>
           <el-descriptions-item label="器械名">{{ equipment.name }}</el-descriptions-item>
-          <el-descriptions-item label="说明">{{ equipment.function }}</el-descriptions-item>
+          <el-descriptions-item label="说明">{{ equipment.functions }}</el-descriptions-item>
           <el-descriptions-item label="操作流程">
             <el-select v-model="role" placeholder="请选择角色" size="small" clearable>
               <el-option
