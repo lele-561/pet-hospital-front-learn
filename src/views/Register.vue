@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {postRequestJSON} from '../utils/api';
+import {postFormData} from '../utils/api';
 
 export default {
   name: 'Register',
