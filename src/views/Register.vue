@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     register: function () {
+      console.log('这是form',this.form)
       this.$refs.form.validate((valid) => {
         if (valid) {
           console.log('这是name',this.form.name)
