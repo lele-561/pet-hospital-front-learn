@@ -63,6 +63,7 @@ export default {
     register: function () {
       this.$refs.form.validate((valid) => {
         if (valid) {
+          console.log('这是name',this.form.name)
           postRequestJSON('/user/register', {
             phoneNumber: this.form.phoneNumber,
             name: this.form.name,
