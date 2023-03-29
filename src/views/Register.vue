@@ -80,7 +80,7 @@ export default {
               });
             } else if (resp.data.code === 1) {
               this.$message.error(resp.data.message)
-              this.$message.error(resp.data)
+              console.log(resp.data)
               this.form = {}
             }
           })
