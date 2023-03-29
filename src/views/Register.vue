@@ -65,7 +65,7 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           console.log('这是name',this.form.name)
-          postRequestJSON('/user/register', {
+          postFormData('/user/register', "", {
             phoneNumber: this.form.phoneNumber,
             name: this.form.name,
             password: this.$md5(this.form.password)
