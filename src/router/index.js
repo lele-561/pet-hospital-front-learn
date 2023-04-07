@@ -6,6 +6,12 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 
 import HospitalMap from "../views/Detail/HospitalGuide/HospitalMap";
+import OnlineTest from '../views/Detail/OnlineTest'
+import DiseaseLearning from '../views/Detail/FunctionalLearning/DiseaseLearning'
+import RolePlay from '../views/Detail/FunctionalLearning/RolePlay'
+import RolePlayDetail from '../views/Detail/FunctionalLearning/RolePlayDetail'
+import RealDiseaseLearning from '../views/Detail/FunctionalLearning/RealDiseaseLearning'
+import OnlineTestForm from '../views/Detail/OnlineTestForm'
 
 Vue.use(VueRouter)
 
@@ -31,6 +37,40 @@ const routes = [{
             name: 'hospitalGuide_map',
             component: HospitalMap
         },
+        //线上测试
+        {
+            path: '/onlineTest',
+            name: 'onlineTest',
+            component: OnlineTest
+        },
+        {
+            path: 'onlineTest/test',
+            name: 'onlineTest_test',
+            component: OnlineTestForm
+        },
+        //病例学习
+        {
+            path: 'functionalLearning/diseaseLearning',
+            name: 'functionalLearning_diseaseLearning',
+            component: DiseaseLearning
+        },
+        //真实病例学习
+        {
+            path: 'functionalLearning/realDiseaseLearning',
+            name: 'functionalLearning_realDiseaseLearning',
+            component: RealDiseaseLearning
+        },
+        //角色扮演
+        {
+            path: 'functionalLearning/rolePlay',
+            name: 'functionalLearning_rolePlay',
+            component: RolePlay
+        },
+        {
+            path: 'functionalLearning/rolePlayDetail',
+            name: 'functionalLearning_rolePlayDetail',
+            component: RolePlayDetail
+        },
     ]
 },
     {
@@ -48,7 +88,8 @@ const routes = [{
         meta: {
             login: false
         }
-    }
+    },
+    
 ]
 
 const router = new VueRouter({
