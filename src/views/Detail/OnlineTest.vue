@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <common-table-operator :tableData="tableData" :tableLabel="tableLabel" @test="handleTest"
+            <common-table-operator :tableData="tableData" :tableLabel="tableLabel" @test="handleTest" :text="'参加考试'"
             ></common-table-operator>
             <div style="text-align: center; margin-top: 10px">
               <el-pagination :page-count="totalPages" :page-size="pageSize" :pager-count='7' background

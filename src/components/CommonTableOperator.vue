@@ -15,7 +15,7 @@
         </el-table-column>
         <el-table-column label="操作" min-width="25%">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" plain @click="handleTest(scope.row)">参加考试</el-button>
+            <el-button size="mini" type="primary" plain @click="handleTest(scope.row)">{{ text }}</el-button>
             <!-- <el-button size="mini" type="danger" icon="el-icon-delete" plain @click="handleDelete(scope.row)"></el-button> -->
           </template>
         </el-table-column>
@@ -25,14 +25,17 @@
   
   <script>
   export default {
-    name: 'CommonTable',
+    name: 'CommonTableOperator',
     props: {
       tableData: Array,
       tableLabel: Array,
       config: Object,
+      text: String,
     },
     data() {
-      return {}
+      return {
+        text: '',
+      }
     },
     methods: {
       // 给子组件绑定事件

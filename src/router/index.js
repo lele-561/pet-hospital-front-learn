@@ -11,6 +11,7 @@ import DiseaseLearning from '../views/Detail/FunctionalLearning/DiseaseLearning'
 import RolePlay from '../views/Detail/FunctionalLearning/RolePlay'
 import RolePlayDetail from '../views/Detail/FunctionalLearning/RolePlayDetail'
 import RealDiseaseLearning from '../views/Detail/FunctionalLearning/RealDiseaseLearning'
+import RealDiseaseLearningDetail from '../views/Detail/FunctionalLearning/RealDiseaseLearningDetail'
 import OnlineTestForm from '../views/Detail/OnlineTestForm'
 
 Vue.use(VueRouter)
@@ -59,6 +60,11 @@ const routes = [{
             path: 'functionalLearning/realDiseaseLearning',
             name: 'functionalLearning_realDiseaseLearning',
             component: RealDiseaseLearning
+        },
+        {
+            path: 'functionalLearning/realDiseaseLearningDetail',
+            name: 'functionalLearning_realDiseaseLearningDetail',
+            component: RealDiseaseLearningDetail
         },
         //角色扮演
         {
