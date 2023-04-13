@@ -90,7 +90,7 @@
         <!-- 搜索框 -->
         <el-form :inline="true" style="margin-top:12px">
             <el-form-item>
-            <el-select v-model="value" clearable placeholder="请选择病类" ref="selectorSearch" @change="handleSearchChange">
+            <el-select v-model="value" clearable placeholder="请选择病类" ref="selectorSearch" @change="handleSearchChange" @clear="handleClear">
                 <el-option
                 v-for="item in big_diseases"
                 :key="item.value"
@@ -110,7 +110,7 @@
         <div>
             <el-row class="rowClass" v-for="(colArr, index) in rowData" :key="index" :gutter="24">
             <el-col v-for="(btn, index) in colArr" :key="btn.disease_id" :span="4">
-                <el-button class="buttonClass" plain @click="editDisease" :id="btn.disease_id">{{ btn.disease_type_name }}</el-button>
+                <el-button class="buttonClass" plain @click="editDisease" :id="btn.disease_id">{{ btn.disease_name }}</el-button>
             </el-col>
             </el-row>
         </div>
@@ -158,6 +158,10 @@
     };
   },
   methods: {
+    handleClear() {
+      this.disease_type = ""
+      this.search()
+    },
     handleSearchChange(value) {
       let obj = {}
       obj = this.big_diseases.find((item) => {
@@ -219,13 +223,13 @@
       })
     },
     loadExaminations() { 
-      getFormData('/checkup/getAllCheckups').then((resp) => {
-        this.examinations = resp.data.result.checkups
+      getFormData('/checkup/getAllCheckups', {content: '', currentPage: 0}).then((resp) => {
+        this.examinations = resp.data.result
       })
     },
     loadMedicines() { 
-      getFormData('/medicine/getAllMedicines').then((resp) => {
-        this.medicines = resp.data.result.medicines
+      getFormData('/medicine/getAllMedicines', {content: '', currentPage: 0}).then((resp) => {
+        this.medicines = resp.data.result
       })
     },
     search() {

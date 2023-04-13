@@ -63,7 +63,7 @@
                 });
             }
             else {
-                postFormData('/rolePlay/getNextStep', {procedure_id: this.curr_id, currstep: this.actions[this.actions.length-1].next_step}).then((resp) => {
+                postFormData('/rolePlay/getNextStep', {procedure_id: this.curr_id, curr_step: this.actions.length+1}).then((resp) => {
                     console.log(resp.data.result)
                     this.actions.push(resp.data.result)
                 })
@@ -80,7 +80,7 @@
                 }
                 )
             this.curr_action = obj.action
-            postFormData('/rolePlay/getNextStep', {procedure_id: this.curr_id, currstep: ""}).then((resp) => {
+            postFormData('/rolePlay/getNextStep', {procedure_id: this.curr_id, curr_step: 1}).then((resp) => {
                 console.log(resp.data.result)
                 this.actions.push(resp.data.result)
             })
@@ -95,7 +95,8 @@
             this.curr_id = 0
         },
         getRoleDetail() {
-            getFormData('/rolePlay/getAllActions', {roleType: this.$route.query.id}).then((resp) => {
+            console.log(this.$route.query.id)
+            getFormData('/rolePlay/getAllActions', {role_type: this.$route.query.id}).then((resp) => {
                 this.action_infos = resp.data.result.action_infos
                 this.rowData = []
                 this.colData = []
