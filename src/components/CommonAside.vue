@@ -53,27 +53,43 @@ export default {
           icon: 's-custom',
           children: [
             {
-              path: '/',
-              name: '',
-              label: '',
+              path: 'functionalLearning/rolePlay',
+              name: 'functionalLearning_rolePlay',
+              label: '角色扮演',
               icon: 'collection-tag',
-              url: '/'
+              url: 'rolePlay/rolePlay'
+            },
+            {
+              path: 'functionalLearning/diseaseLearning',
+              name: 'functionalLearning_diseaseLearning',
+              label: '病例学习',
+              icon: 'collection-tag',
+              url: 'diseaseLearning/diseaseLearning'
+            },
+            {
+              path: 'functionalLearning/RealDiseaseLearning',
+              name: 'functionalLearning_realDiseaseLearning',
+              label: '真实病例学习',
+              icon: 'collection-tag',
+              url: 'realDiseaseLearning/realDiseaseLearning'
             },
           ]
         },
         {
           path: '/onlineTest',
+          name: 'onlineTest',
           label: '线上测试',
           icon: 's-claim',
-          children: [
-            {
-              path: '/',
-              name: '',
-              label: '',
-              icon: 'collection-tag',
-              url: '/'
-            },
-          ]
+          url: 'onlineTest/onlineTest'
+          // children: [
+          //   {
+          //     path: '/',
+          //     name: '',
+          //     label: '',
+          //     icon: 'collection-tag',
+          //     url: '/'
+          //   },
+          // ]
         }],
     };
   },
