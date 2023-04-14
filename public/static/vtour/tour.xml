@@ -260,7 +260,7 @@
 		<hotspot name="spot_7_1" style="hotspot_arrow_white" ath="-90.0" atv="20.0" linkedscene="scene_右边走廊1" title="前往「右边走廊」"/>
 		<hotspot name="spot_7_2" style="hotspot_arrow_white" ath="5.0" atv="10.0" linkedscene="scene_药房" title="进入「药房」"/>
 		<hotspot name="spot_7_3" style="hotspot_arrow_white" ath="115.0" atv="10.0" linkedscene="scene_右边走廊2" title="前往「右边走廊」"/>
-		<hotspot name="spot_7_氧气吸氧舱" style="hotspot_info_iframe" ath="-25.0" atv="-15.0" title="氧气吸氧舱" onclick="onShowHotspot"/>
+		<hotspot name="spot_7_氧气吸氧仓" style="hotspot_info_iframe" ath="-25.0" atv="-15.0" title="氧气吸氧仓" onclick="onShowHotspot"/>
 		<hotspot name="spot_7_宠物输液泵" style="hotspot_info_iframe" ath="-30.0" atv="15.0" title="宠物输液泵" onclick="onShowHotspot"/>
 		<hotspot name="spot_7_激光理疗仪" style="hotspot_info_iframe" ath="58.0" atv="-5.0" title="激光理疗仪" onclick="onShowHotspot"/>
 		<hotspot name="spot_7_供氧机" style="hotspot_info_iframe" ath="55.0" atv="30.0" title="供氧机" onclick="onShowHotspot"/>
