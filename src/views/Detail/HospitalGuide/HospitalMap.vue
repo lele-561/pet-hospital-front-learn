@@ -23,7 +23,7 @@
           <el-descriptions-item label="科室">{{ department.name }}</el-descriptions-item>
           <el-descriptions-item label="电话">{{ department.phoneNumber }}</el-descriptions-item>
           <el-descriptions-item label="负责人">
-            <el-tag v-for="item in department.directors" :key="item">{{ item }}</el-tag>
+            <el-tag>{{ department.directors }}</el-tag>
           </el-descriptions-item>
           <el-descriptions-item label="介绍">{{ department.functions }}</el-descriptions-item>
         </el-descriptions>
