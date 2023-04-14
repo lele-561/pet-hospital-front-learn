@@ -94,11 +94,10 @@ export default {
         if (this.role === '' || this.equipment === '')
           this.processContent = ''
         else {
-          for (var i in this.equipment.process) {
-            if (this.role === this.equipment.process[i].role)
-              this.processContent = this.equipment.process[i].content
-            else this.processContent = ''
-          }
+          if (this.role === '兽医')
+            this.processContent = this.equipment.process['兽医']
+          else if (this.role === '医助')
+            this.processContent = this.equipment.process['医助']
         }
       }
     },
