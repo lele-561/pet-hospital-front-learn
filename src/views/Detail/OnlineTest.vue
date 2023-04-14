@@ -79,6 +79,7 @@
                 this.totalPages = resp.data.result.totalPages
                 this.currentPage = resp.data.result.currentPage
             })
+            console.log(this.tableData)
         },
         handleTest(row) {
             // this.operateType = 'edit';

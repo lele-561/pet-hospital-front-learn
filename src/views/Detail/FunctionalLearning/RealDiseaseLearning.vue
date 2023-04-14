@@ -44,7 +44,7 @@ export default {
           this.loadAllPets()
       },
       loadAllPets() {
-          getFormData('/petProfile/getAllPetProfiles', {currentPage: this.currentPage}).then((resp) => {
+          getFormData('/petProfile/getAllPetProfiles', {content: '', currentPage: this.currentPage}).then((resp) => {
               this.tableData = resp.data.result.petProfiles
               this.totalPages = resp.data.result.totalPages
               this.currentPage = resp.data.result.currentPage
