@@ -77,9 +77,18 @@ export default {
   methods: {
     getDepartment(departmentName) {
       console.log('departmentName', departmentName)
-      getFormData('/department/getOneDepartment', {name: departmentName}).then((resp) => {
-        this.department = resp.data.result
-      })
+      if (departmentName === '中间走廊1' || departmentName === '中间走廊2' || departmentName === '右边走廊1'
+          || departmentName === '右边走廊2' || departmentName === '左边走廊1' || departmentName === '左边走廊2')
+        this.department = {
+          name: departmentName.slice(0, -1),
+          phoneNumber: '无',
+          directors: '无',
+          functions: '无'
+        }
+      else
+        getFormData('/department/getOneDepartment', {name: departmentName}).then((resp) => {
+          this.department = resp.data.result
+        })
     },
     getEquipment(equipmentName) {
       console.log('equipmentName', equipmentName)
