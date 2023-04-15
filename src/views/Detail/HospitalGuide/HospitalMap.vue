@@ -23,7 +23,7 @@
           <el-descriptions-item label="科室">{{ department.name }}</el-descriptions-item>
           <el-descriptions-item label="电话">{{ department.phoneNumber }}</el-descriptions-item>
           <el-descriptions-item label="负责人">
-            <el-tag>{{ department.directors }}</el-tag>
+            <el-tag>{{ department.directorName }}</el-tag>
           </el-descriptions-item>
           <el-descriptions-item label="介绍">{{ department.functions }}</el-descriptions-item>
         </el-descriptions>
@@ -40,7 +40,7 @@
                   :value="item.value">
               </el-option>
             </el-select>
-            <div style="margin-top: 10px">{{ processContent }}</div>
+              <div style="margin-top: 1%;height: 110px;overflow-y: auto">{{ processContent }}</div>
           </el-descriptions-item>
         </el-descriptions>
       </el-card>
@@ -82,7 +82,7 @@ export default {
         this.department = {
           name: departmentName.slice(0, -1),
           phoneNumber: '无',
-          directors: '无',
+          directorName: '无',
           functions: '无'
         }
       else
@@ -116,7 +116,6 @@ export default {
     // 监听localhostStorage的数据变化，结合utils/tool.js配合使用
     const that = this
     window.addEventListener('setItemEvent', function (e) {
-      console.log(e.newValue)
       var newValue = e.newValue
       var parts = newValue.split('_')
       that.role = ''
@@ -150,5 +149,7 @@ export default {
 <style lang="less" scoped>
 .equipment {
   margin-top: 5%;
+  margin-bottom: 100%;
+  height: 50px;
 }
 </style>
