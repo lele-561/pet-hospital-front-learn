@@ -135,7 +135,7 @@
 
       big_diseases: [],
       examinations: [],
-      medicines: [],
+      treatments: [],
       value: "",
       disease_type: "", //用于搜索，因为大病没有id
       fileList: [],
@@ -190,17 +190,19 @@
         return item.id === value
       }
       )
+      console.log(obj)
       return obj.name
     },
     getOneDisease(e) {
       let id = e.currentTarget.getAttribute("id")
       getFormData('/diseaseManage/getOneDisease', {disease_id: id}).then((resp) => {
-        this.operateFormData = JSON.parse(JSON.stringify(resp.data.result.disease_info))
+        this.operateFormData = resp.data.result.disease_info
+        console.log(resp.data.result.disease_info)
         for(let i = 0; i < this.operateFormData.examination.length; i++) {
             this.operateFormData.examination[i] = this.id2examination(this.operateFormData.examination[i])
         }
         for(let i = 0; i < this.operateFormData.treatment.length; i++) {
-            this.operateFormData.treatment[i] = this.id2examination(this.operateFormData.treatment[i])
+            this.operateFormData.treatment[i] = this.id2treatment(this.operateFormData.treatment[i])
         }
         this.fileList = this.operateFormData.file_info
       })
@@ -229,7 +231,7 @@
     },
     loadMedicines() { 
       getFormData('/medicine/getAllMedicines', {content: '', currentPage: 0}).then((resp) => {
-        this.medicines = resp.data.result
+        this.treatments = resp.data.result
       })
     },
     search() {
@@ -248,6 +250,7 @@
               this.colData = []
             }
           })
+          this.rowData.push(this.colData)
         }
       })
     },

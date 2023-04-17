@@ -101,16 +101,17 @@
                 this.rowData = []
                 this.colData = []
                 if(this.action_infos.length <= 3) {
-                this.rowData.push(this.action_infos)
+                    this.rowData.push(this.action_infos)
                 }
                 else {
-                this.action_infos.forEach((item, index, cols) => {
-                    this.colData.push(item)
-                    if((index + 1) % 3 === 0) {
+                    this.action_infos.forEach((item, index, cols) => {
+                        this.colData.push(item)
+                        if((index + 1) % 3 === 0) {
+                        this.rowData.push(this.colData)
+                        this.colData = []
+                        }
+                    })
                     this.rowData.push(this.colData)
-                    this.colData = []
-                    }
-                })
                 }
             })
         }

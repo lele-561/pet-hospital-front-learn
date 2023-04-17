@@ -211,7 +211,9 @@
         getOnePet() {
             getFormData('/petProfile/getOnePetProfile', {id: this.$route.query.id}).then((resp) => {
                 this.petData = resp.data.result
+                console.log(resp.data.result)
             })
+            
         },
 
         back() {
@@ -257,12 +259,12 @@
         },
         loadExaminations() { 
         getFormData('/checkup/getAllCheckups').then((resp) => {
-            this.examinations = resp.data.result.checkups
+            this.examinations = resp.data.result
         })
         },
         loadMedicines() { 
         getFormData('/medicine/getAllMedicines').then((resp) => {
-            this.medicines = resp.data.result.medicines
+            this.medicines = resp.data.result
         })
         },
 
