@@ -246,7 +246,10 @@
                 if (valid) {
                     console.log(this.operateFormData)
                     this.isDisabled = true
-                    postFormData('/learn/getTotalPrice').then((resp) => {
+                    console.log(this.operateFormData.examination)
+                    var examination = this.operateFormData.examination.join(",")
+                    var treatment = this.operateFormData.treatment.join(",")
+                    postFormData('/learn/getTotalPrice', {examination: examination, treatment: treatment}).then((resp) => {
                         this.price = resp.data.result
                     })
                 }
