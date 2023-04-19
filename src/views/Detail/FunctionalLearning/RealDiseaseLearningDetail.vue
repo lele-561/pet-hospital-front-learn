@@ -73,7 +73,7 @@
                       <el-form-item label="诊疗方案" prop="treatment">
                         <el-select v-model="operateFormData.treatment" multiple clearable placeholder="请选择诊疗药品">
                           <el-option
-                            v-for="item in medicines"
+                            v-for="item in treatments"
                             :key="item.id"
                             :label="item.name"
                             :value="item.id">
@@ -165,7 +165,7 @@
             petData: {},
 
             examinations: [],
-            medicines: [],
+            treatments: [],
             price: {},
 
             // 表单数据，不一定都显示，但会传回后端
@@ -258,14 +258,16 @@
             this.loadMedicines()
         },
         loadExaminations() { 
-        getFormData('/checkup/getAllCheckups').then((resp) => {
-            this.examinations = resp.data.result
-        })
+          getFormData('/checkup/getAllCheckups', {content: '', currentPage: 0}).then((resp) => {
+              this.examinations = resp.data.result
+              console.log(resp.data.result)
+          })
         },
         loadMedicines() { 
-        getFormData('/medicine/getAllMedicines').then((resp) => {
-            this.medicines = resp.data.result
-        })
+          getFormData('/medicine/getAllMedicines',{content: '', currentPage: 0}).then((resp) => {
+              this.treatments = resp.data.result
+              console.log(resp.data.result)
+          })
         },
 
     }, 
