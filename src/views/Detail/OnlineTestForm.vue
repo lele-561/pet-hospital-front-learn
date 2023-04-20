@@ -52,23 +52,23 @@
     },
     methods: {
         validateAnswer() {
-            console.log(this.operateFormData.answers.length + ' ' + this.questions_info.length)
+            // console.log(this.operateFormData.answers.length + ' ' + this.questions_info.length)
             if(this.operateFormData.answers.length < this.questions_info.length) {
                 return false
             }
             return true
         },
         calculateScore() {
-            console.log(this.question_score)
+            // console.log(this.question_score)
             var ans = this.operateFormData.answers
             for(let i = 0; i < ans.length; i++) {
                 if(ans[i] === this.questions_info[i].answer_num) {
                     this.total_score = this.total_score + this.question_score
                 }
             }
-            console.log("total = "+this.total_score)
+            // console.log("total = "+this.total_score)
             postFormData('/exam/updateUserExam', {history_score: this.total_score, user_id: '1122', exam_id: this.$route.query.id}).then((resp) => {
-                console.log("submit")
+                this.$message({type: 'success', message: '已成功提交'});
             })
         },
         num2answer(string) {
@@ -113,7 +113,7 @@
                 this.question_num = resp.data.result.paper_info.question_num
                 // this.operateFormData.questions = this.questions_info
             })
-            console.log(this.questions_info)
+            // console.log(this.questions_info)
         },
         back() {
             if(this.isDisabled === true) {
@@ -148,7 +148,7 @@
                     type: 'warning'
                 }).then(() => {
                     this.isDisabled = true
-                    console.log(this.operateFormData.answers)
+                    // console.log(this.operateFormData.answers)
                     this.calculateScore()
                 }).catch(() => {
                     this.$message({type: 'info', message: '已取消提交'});
@@ -161,8 +161,8 @@
                     type: 'warning'
                 }).then(() => {
                     this.isDisabled = true
-                    console.log("eooooooooooooo")
-                    console.log(this.operateFormData.answers)
+                    // console.log("eooooooooooooo")
+                    // console.log(this.operateFormData.answers)
                     this.calculateScore()
                 }).catch(() => {
                     this.$message({type: 'info', message: '已取消提交'});

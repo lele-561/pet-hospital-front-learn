@@ -196,18 +196,16 @@
     },
     methods: {
         handleChange(value) {
-            console.log(value)
+            // console.log(value)
             this.operateFormData.disease = value
         },
         validateAnswer() {
-            console.log(this.operateFormData.answers.length + ' ' + this.questions_info.length)
+            // console.log(this.operateFormData.answers.length + ' ' + this.questions_info.length)
             if(this.operateFormData.answers.length < this.questions_info.length) {
                 return false
             }
             return true
         },
-
-
         getOnePet() {
             getFormData('/petProfile/getOnePetProfile', {id: this.$route.query.id}).then((resp) => {
                 this.petData = resp.data.result
@@ -215,7 +213,6 @@
             })
             
         },
-
         back() {
             if(this.isDisabled === true) {
                 this.$confirm('确认退出吗？', '提示', {
@@ -244,9 +241,9 @@
         confirm(formName) {
         this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    console.log(this.operateFormData)
+                    // console.log(this.operateFormData)
                     this.isDisabled = true
-                    console.log(this.operateFormData.examination)
+                    // console.log(this.operateFormData.examination)
                     var examination = this.operateFormData.examination.join(",")
                     var treatment = this.operateFormData.treatment.join(",")
                     postFormData('/learn/getTotalPrice', {examination: examination, treatment: treatment}).then((resp) => {
@@ -263,13 +260,13 @@
         loadExaminations() { 
           getFormData('/checkup/getAllCheckups', {content: '', currentPage: 0}).then((resp) => {
               this.examinations = resp.data.result
-              console.log(resp.data.result)
+              // console.log(resp.data.result)
           })
         },
         loadMedicines() { 
           getFormData('/medicine/getAllMedicines',{content: '', currentPage: 0}).then((resp) => {
               this.treatments = resp.data.result
-              console.log(resp.data.result)
+              // console.log(resp.data.result)
           })
         },
 

@@ -178,12 +178,12 @@
     },
     id2examination(value) {
       let obj = {}
-      console.log(this.examinations)
+      // console.log(this.examinations)
       obj = this.examinations.find((item) => {
         return item.id === value
       }
       )
-      console.log(obj)
+      // console.log(obj)
       return obj.name
     },
     id2treatment(value) {
@@ -192,14 +192,14 @@
         return item.id === value
       }
       )
-      console.log(obj)
+      // console.log(obj)
       return obj.name
     },
     getOneDisease(e) {
       let id = e.currentTarget.getAttribute("id")
       getFormData('/diseaseManage/getOneDisease', {disease_id: id}).then((resp) => {
         this.operateFormData = resp.data.result.disease_info
-        console.log(resp.data.result.disease_info)
+        // console.log(resp.data.result.disease_info)
         for(let i = 0; i < this.operateFormData.examination.length; i++) {
             this.operateFormData.examination[i] = this.id2examination(this.operateFormData.examination[i])
         }
