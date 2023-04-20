@@ -139,6 +139,8 @@
       value: "",
       disease_type: "", //用于搜索，因为大病没有id
       fileList: [],
+      fileSrc: 'https://pethospitalresources.blob.core.windows.net/pethospicalfiles/',
+
       
       operateFormData: {
         disease_id: -1,
@@ -204,7 +206,15 @@
         for(let i = 0; i < this.operateFormData.treatment.length; i++) {
             this.operateFormData.treatment[i] = this.id2treatment(this.operateFormData.treatment[i])
         }
-        this.fileList = this.operateFormData.file_info
+        for(let i = 0; i < resp.data.result.disease_info.file_info.length; i++) {
+          const fileItem = {
+            name: resp.data.result.disease_info.file_info[i].name,
+            url: this.fileSrc + resp.data.result.disease_info.file_info[i].url,
+            type: resp.data.result.disease_info.file_info[i].type,
+            description: resp.data.result.disease_info.file_info[i].description
+          };
+          this.fileList.push(fileItem)
+        }
       })
     },
     loadAllData() {
@@ -257,6 +267,7 @@
 
     editDisease(e) {
       this.isShow = true;
+      this.fileList = []
       this.getOneDisease(e)
     },
   },
